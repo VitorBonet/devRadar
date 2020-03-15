@@ -2,7 +2,7 @@ const axios = require('axios');
 const Dev = require('../models/Dev');
 
 const parseStringAsArray = require('../utils/parseStringAsArray');
-const { findConnections } = require('../websocket');
+const { findConnections, sendMessage } = require('../websocket');
 // index, show, store, update, destroy
 
 module.exports = {
@@ -25,7 +25,7 @@ module.exports = {
         
             const techArray = parseStringAsArray(techs);
         
-            const techsArray = parseStringAsArray(techs);
+            const techsArray = parseStringAsArray(techs );
 
             const location = {
                 type: 'Point',
@@ -47,7 +47,7 @@ module.exports = {
                 techsArray,
             );
 
-            console.log(sendSocketMessageTo);
+            sendMessage(sendSocketMessageTo, 'new-dev', dev);
         }
     
         return res.json( dev );
